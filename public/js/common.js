@@ -5,6 +5,19 @@ define(['jquery', 'nprogress', 'template', 'layer','cookie'],
 
 	NProgress.done();
 
+	var index;
+
+	// 处理加载状态
+	$(document)
+		.ajaxStart(function() {
+			index = layer.load(0, {shade: false}); 
+		})
+		.ajaxStop(function() {
+			setTimeout(function() {
+				 layer.close(index);
+			}, 300);
+		});
+
 	$('.navs ul').prev('a').on('click', function () {
 		$(this).next().slideToggle();
 	});

@@ -14,7 +14,7 @@ define(['jquery', 'template', 'layer', 'bootstrap'], function ($, template, laye
     type: 'get',
     dataType: 'json',
     beforeSend: function () {
-      index = layer.load(0, {shade: false}); 
+      
       console.log(index);
     },
     success: function (data) {
@@ -24,7 +24,7 @@ define(['jquery', 'template', 'layer', 'bootstrap'], function ($, template, laye
       }
     },
     complete: function () {
-      layer.close(index);
+     
     }
 
   });
