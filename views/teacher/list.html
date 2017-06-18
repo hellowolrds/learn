@@ -93,7 +93,7 @@
             <td>{{ $value.tc_join_date}}</td>
             <td data-id="{{$value.tc_id}}" data-status="{{$value.tc_status}}">
                 <a href="javascript:void(0)" class="btn btn-info btn-xs preview">查 看</a>
-                <a href="../teacher/edit" class="btn btn-info btn-xs">编 辑</a>
+                <a href="../teacher/add?tc_id={{$value.tc_id}}" class="btn btn-info btn-xs">编 辑</a>
                 <a href="javascript:void(0)" class="btn btn-warning btn-xs status">{{$value.tc_status == 1 ? '启用' : '注销'}}</a>
             </td>
         </tr>

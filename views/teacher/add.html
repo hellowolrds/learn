@@ -15,69 +15,81 @@
         <div class="container-fluid">
             <!-- 头部 -->
           <?php include "/views/common/header.html" ?>
-            <div class="body teacher">
+            <div class="body teacher" id="teacher_edit_add">
                 <!-- 面包屑 -->
-                <ol class="breadcrumb">
-                    <li><a href="../teacher/list">讲师管理</a></li>
-                    <li class="active">讲师添加</li>
-                </ol>
-                <div class="teacher-add">
-                    <form id="teacherAdd" action="../teacher/list" class="form-horizontal col-md-offset-2">
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">姓名</label>
-                            <div class="col-md-4">
-                                <input type="text" name="tc_name"class="form-control input-sm" placeholder="讲师名称">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">密码</label>
-                            <div class="col-md-4">
-                                <input type="password" name="tc_pass" class="form-control input-sm">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">入职时间</label>
-                            <div class="col-md-4">
-                                <input type="text" name="tc_join_date" class="form-control input-sm" id="job-calendar">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">类型</label>
-                            <div class="col-md-2">
-                                <select name="tc_type" class="form-control input-sm">
-                                    <option value="1">讲师</option>
-                                    <option value="0">管理员</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">性别</label>
-                            <div class="col-md-4">
-                                <label class="radio-inline">
-                                    <input type="radio" name="tc_gender" value="0" checked> 男
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="tc_gender" value="1" type="radio"> 女
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-7">
-                                <!--<a href="../teacher/list" id="btnAdd" class="btn btn-success btn-sm pull-right"> 添 加 </a>-->
-                                <input type="submit" id="btnAdd" value="添加" class="btn btn-success btn-sm pull-right" />
-                            </div>                          
-                        </div>
-                    </form>
-                </div>
+             
             </div>
         </div>
     </div>
+
+
+    <script type="text/html" id="add_edit_tpl">
+        <ol class="breadcrumb">
+            <li><a href="../teacher/list">讲师管理</a></li>
+            <li class="active">{{title}}</li>
+        </ol>
+          <div class="teacher-add">
+            <form id="teacherAdd" class="form-horizontal col-md-offset-2">
+                {{if !isAdd}}
+                <input type="hidden" name="tc_id" value="{{tc_id}}">
+                {{/if}}
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">姓名</label>
+                    <div class="col-md-4">
+                        <input type="text" name="tc_name" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
+                    </div>
+                </div>
+             {{ if isAdd }}
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">密码</label>
+                    <div class="col-md-4">
+                        <input type="password" name="tc_pass" class="form-control input-sm">
+                    </div>
+                </div>
+                {{/if}}
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">入职时间</label>
+                    <div class="col-md-4">
+                        <input type="text" name="tc_join_date" value="{{tc_join_date}}" class="form-control input-sm" id="job-calendar">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">类型</label>
+                    <div class="col-md-2">
+                        <select name="tc_type" class="form-control input-sm">
+                            <option value="1" {{if tc_type === '0'}} selected {{/if}}>讲师</option>
+                            <option value="0" {{if tc_type === '1'}} selected {{/if}}>管理员</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">性别</label>
+                    <div class="col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="tc_gender" value="0" {{ if tc_gender === '0'}} checked {{/if}}> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input name="tc_gender" value="1" type="radio" {{ if tc_gender === '0'}} checked {{/if}}> 女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <!--<a href="../teacher/list" id="btnAdd" class="btn btn-success btn-sm pull-right"> 添 加 </a>-->
+                        <input type="submit" id="btnAdd" value="{{btnText}}" class="btn btn-success btn-sm pull-right" />
+                    </div>                          
+                </div>
+            </form>
+        </div>
+    </script>
+  
 
     <?php include "/views/common/script.html" ?>
 
     <script>
         //添加讲师操作
-        require(['jquery', 'validate', 'bootstrap', 'datepicker'], function ($) {
+        require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form'], 
+        function ($, template, layer) {
 
             // 首先取出表单元素的中的值
             // var text = $("#teacherAdd").serialize();
@@ -103,17 +115,90 @@
 
                 }
             });
-      
-            $("#btnAdd").click(function () {
-               
-              if ( validator.form() ) {
-                var text = $("#teacherAdd").serialize();
-                $.get("/api/teacher/add?"+text, function (data) {
+
+
+            var tc_id = location.search.substr(1).split("=")[1];
+            if ( tc_id ) {
+                editTeacher();
+            }
+            else {
+                addTecher()
+            }
+
+            function addTecher() {
+               var html = template('add_edit_tpl', {
+                   title: '教师添加',
+                   isAdd: true,
+                   tc_type: '0',
+                   tc_gender: '0',
+                   btnText: '添 加'
+               });
+               $(".teacher").html(html);
+
+               $("#teacher_edit_add").on('submit', 'form', function () {
+                  $(this).ajaxSubmit({
+                      url: '/api/teacher/add',
+                      type: 'post',
+                      dataType: 'json',
+                      success: function (data){
+                      },
+                      complete: function () {
+                        layer.msg('添加成功');
+                        setTimeout(function () {
+                            location.href = "/index.php/teacher/list";
+                        }, 1500);
+                      }
+                  });
+
+                  return false;
+                       
+               });
+            }
+
+            function editTeacher() {
+                $.get("/api/teacher/edit?tc_id=" + tc_id, function ( data ) {
+                    var obj = data.result;
+                    obj.title = "教师编辑";
+                    obj.isAdd = false;
+                    obj.btnText = "修改";
+                    var html = template('add_edit_tpl', obj);
+                    $(".teacher").html(html);
                 });
 
-              }
+                $("#teacher_edit_add").on('submit', 'form', function () {
+                  $(this).ajaxSubmit({
+                      url: '/api/teacher/update',
+                      type: 'post',
+                      dataType: 'json',
+                      success: function (data) {
+                        console.log(data);
+                      },
+                      complete: function () {
+                        layer.msg('修改成功');
+                        setTimeout(function () {
+                            location.href = "/index.php/teacher/list";
+                        }, 1500);
+                       
+                      }
+                  });
+
+                  return false;
+                       
+               });
+
+            }
+
+      
+            // $("#btnAdd").click(function () {
+               
+            //   if ( validator.form() ) {
+            //     var text = $("#teacherAdd").serialize();
+            //     $.get("/api/teacher/add?"+text, function (data) {
+            //     });
+
+            //   }
                 
-            });
+            // });
 
             // 获取日期
              $('#job-calendar').datepicker({

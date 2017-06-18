@@ -13,7 +13,8 @@
 			nprogress: 'assets/nprogress/nprogress',
 			template: 'assets/artTemplate/template-web',
 			datepicker: 'assets/bootstrap-datepicker/js/bootstrap-datepicker.min',
-			layer: 'assets/layer/layer'
+			layer: 'assets/layer/layer',
+			form: 'assets/jquery-form/jquery.form'
 		},
 		//模块之间的依赖配置
 		shim: {
