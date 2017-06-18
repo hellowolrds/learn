@@ -25,7 +25,7 @@
 
     <!--定义个人资料模板-->
     <script id="person_tpl" type="text/html">
-        <form action="" class="form-horizontal">
+        <form action="/api/teacher/modify" id="teacher_update" class="form-horizontal">
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">姓名</label>
                 <div class="col-md-5">
@@ -36,7 +36,7 @@
                 <label for="" class="col-md-3 control-label">头像</label>
                 <div class="col-md-2 preview">
                     <img src="{{tc_avatar}}">
-                    <input type="file" id="upfile">
+                    <input type="file" id="upfile" name={{tc_avatar}}>
                     <div class="cover">
                         <i class="fa fa-upload"></i>                  
                     </div>
@@ -45,62 +45,56 @@
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">昵称</label>
                 <div class="col-md-5">
-                    <input type="text" value="{{tc_roster}}" class="form-control input-sm">
+                    <input type="text" name="tc_roster" value="{{tc_roster}}" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">性别</label>
                 <div class="col-md-3">
                     <label class="radio-inline">
-                        <input type="radio" {{if tc_gender==="0"}}checked{{/if}}> 男
+                        <input type="radio" name="tc_gender" {{if tc_gender==="0"}}checked{{/if}}> 男
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" {{if tc_gender==="1"}}checked{{/if}}> 女
+                        <input type="radio" name="tc_gender" {{if tc_gender==="1"}}checked{{/if}}> 女
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">出生日期</label>
                 <div class="col-md-5">
-                    <input type="text" value="{{tc_birthday}}" class="form-control input-sm">
+                    <input type="text" name="tc_birthday" value="{{tc_birthday}}" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">籍贯</label>
-                <div class="col-md-5">
-                    <select name="" class="form-control input-sm">
-                        <option value="">河北省</option>
-                        <option value="">山东省</option>
-                        <option value="">北京市</option>
+                <div class="col-md-5 hometown">
+                    <select name="tc_province" id="p" data-id="{{ tc_province }}" class="form-control input-sm">
+                        <option value="">请选择省份</option>
                     </select>
-                    <select name="" class="form-control input-sm">
-                        <option value="">河北省</option>
-                        <option value="">山东省</option>
-                        <option value="">北京市</option>
+                    <select name="tc_city" id="c" data-id="{{ tc_city }}" class="form-control input-sm">
+                        <option value="">请选择城市</option>
                     </select>
-                    <select name="" class="form-control input-sm">
-                        <option value="">河北省</option>
-                        <option value="">山东省</option>
-                        <option value="">北京市</option>
+                    <select name="tc_district" id="d" data-id="{{ tc_district }}" class="form-control input-sm">
+                       <option value="">请选择县/地区</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">手机号码</label>
                 <div class="col-md-5">
-                    <input type="text" value="{{tc_cellphone}}" class="form-control input-sm">
+                    <input type="text" name="tc_cellphone" value="{{tc_cellphone}}" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">电子邮箱</label>
                 <div class="col-md-5">
-                    <input type="text" value={{tc_email}} class="form-control input-sm">
+                    <input type="text" name="tc_email" value={{tc_email}} class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">入职日期</label>
                 <div class="col-md-5">
-                    <input type="text" value="{{tc_join_date}}" class="form-control input-sm">
+                    <input type="text" name="tc_join_date" value="{{tc_join_date}}" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
@@ -113,7 +107,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-8">
-                    <a href="../course/course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
+                    <button id="teacher_save" type="submit" class="btn btn-success btn-sm pull-right">保存</button>
                     <a href="repass.html" class="btn btn-link btn-sm pull-right">更改密码？</a>
                 </div>
             </div>

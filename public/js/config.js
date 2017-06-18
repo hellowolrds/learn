@@ -17,7 +17,8 @@
 			datepicker: 'assets/bootstrap-datepicker/js/bootstrap-datepicker.min',
 			dateLanguage: 'assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
 			layer: 'assets/layer/layer',
-			form: 'assets/jquery-form/jquery.form'
+			form: 'assets/jquery-form/jquery.form',
+			region: 'assets/jquery-region/jquery.region'
 		},
 		//模块之间的依赖配置
 		shim: {
@@ -32,6 +33,9 @@
 			},
 			valZH: {
 				deps: ['validate']
+			},
+			region: {
+				deps: ['jquery']
 			}
 		}
 	});
