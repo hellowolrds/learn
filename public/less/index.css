@@ -17,6 +17,7 @@ a:focus {
 }
 .main .body label.error {
   color: red;
+  margin-top: 4px;
 }
 .aside {
   position: fixed;
