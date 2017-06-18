@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <<?php include "/views/common/style.html" ?>
+</head>
+<body>
+    
+    <!-- 侧边栏 -->
+    <?php include "/views/common/aside.html" ?>
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+        <?php include "/views/common/header.html" ?>
+            <!-- 讲师列表 -->
+            <div class="body teacher-list">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="../teacher/list">讲师管理</a></li>
+                    <li class="active">讲师列表</li>
+                </ol>
+                <div class="page-title">
+                    <a href="../teacher/add" class="btn btn-success btn-sm pull-right">添加讲师</a>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form action="" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-sm">搜索</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>姓名</th>
+                                <th>职业</th>
+                                <th>性别</th>
+                                <th>出生日期</th>
+                                <th>手机号码</th>
+                                <th>邮箱</th>
+                                <th>入职时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teacher-list">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 添加课程 -->
+    <div class="modal fade" id="teacherModal">
+        <div class="modal-dialog" style="width: 750px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="panel-title">讲师信息</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-condensed">
+                        <tbody id="teaInfo">
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--定义一个模板引擎-->
+    <script type="text/html" id="teacher_list_tpl">
+    <!-- $value 表示数组中的每一项（当前是：对象） $index 表示索引号-->
+        {{ each list }}
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $value.tc_name }}</td>
+            <td>{{ $value.tc_roster }}</td>
+            <!--这段是插值表达式-->
+            <td>{{ $value.tc_gender === '0' ? '男': '女' }}</td>
+            <td>{{ $value.tc_birthday }}</td>
+            <td>{{ $value.tc_cellphone }}</td>
+            <td>{{ $value.tc_email }}</td>
+            <td>{{ $value.tc_join_date}}</td>
+            <td data-id="{{$value.tc_id}}" data-status="{{$value.tc_status}}">
+                <a href="javascript:void(0)" class="btn btn-info btn-xs preview">查 看</a>
+                <a href="../teacher/edit" class="btn btn-info btn-xs">编 辑</a>
+                <a href="javascript:void(0)" class="btn btn-warning btn-xs status">{{$value.tc_status == 1 ? '启用' : '注销'}}</a>
+            </td>
+        </tr>
+        {{ /each }}
+    </script>
+
+        <!--查看讲师详情的模板-->
+    <script type="text/html" id="teacher_view_tpl">
+        <tr>
+            <th>姓名:</th>
+            <td>{{ tc_name }}</td>
+            <th>职位:</th>
+            <td colspan="3">讲师</td>
+            <td rowspan="4" width="128">
+                <div class="avatar">
+                    <!--这个是模板语法-->
+                    <img src="{{ tc_avatar || '../../public/images/default.png' }}" alt="">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>花名:</th>
+            <td>{{ tc_roster }}</td>
+            <th>出生日期:</th>
+            <td colspan="3">{{ tc_birthday }}</td>
+        </tr>
+        <tr>
+            <th>性别:</th>
+            <!--特别处理0或1-->
+            <td>{{ tc_gender === '0' ? '男' : '女'}}</td>
+            <th>入职日期:</th>
+            <td colspan="3">{{ tc_join_date }}</td>
+        </tr>
+        <tr>
+            <th>手机号码:</th>
+            <td colspan="2">{{ tc_cellphone }}</td>
+            <th>邮箱:</th>
+            <td colspan="2">{{ tc_email }}</td>
+        </tr>
+        <tr>
+            <th>籍贯:</th>
+            <!--<td colspan="6">{{ tc_hometown.split('|').join(' ') }}</td>-->
+            <!--利用js语法替换其中|为空格-->
+            <td colspan="6">{{ tc_hometown.replace(/\|/g, ' ') }}</td>
+        </tr>
+        <tr>
+            <td colspan="7">
+                <div class="introduce">
+                    {{ tc_introduce }}
+                </div>
+            </td>
+        </tr>
+    </script>
+
+    <?php include "/views/common/script.html" ?>
+    <script>
+        require(['teacherList']);
+    </script>
+</body>
+</html>
