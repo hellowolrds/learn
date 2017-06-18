@@ -4,6 +4,7 @@
 		paths: {
 			common: 'js/common',
 			index: 'js/index/index',
+			setting: 'js/index/setting',
 			teacherList: 'js/teacher/list',
 			jquery: 'assets/jquery/jquery.min',
 			bootstrap: 'assets/bootstrap/js/bootstrap.min',
