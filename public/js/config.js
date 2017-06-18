@@ -13,6 +13,7 @@
 			nprogress: 'assets/nprogress/nprogress',
 			template: 'assets/artTemplate/template-web',
 			datepicker: 'assets/bootstrap-datepicker/js/bootstrap-datepicker.min',
+			dateLanguage: 'assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
 			layer: 'assets/layer/layer',
 			form: 'assets/jquery-form/jquery.form'
 		},
@@ -23,6 +24,9 @@
 			},
 			datepicker: {
 				deps: ['jquery', 'bootstrap']
+			},
+			dateLanguage: {
+				deps: ['jquery', 'bootstrap', 'datepicker']
 			}
 		}
 	});

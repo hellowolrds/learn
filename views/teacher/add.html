@@ -88,7 +88,7 @@
 
     <script>
         //添加讲师操作
-        require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form'], 
+        require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form', 'dateLanguage'], 
         function ($, template, layer) {
 
             // 首先取出表单元素的中的值
@@ -163,6 +163,13 @@
                     obj.btnText = "修改";
                     var html = template('add_edit_tpl', obj);
                     $(".teacher").html(html);
+                 // 获取日期
+                    $('#job-calendar').datepicker({
+                        format: "yyyy-mm-dd",
+                        language: "zh-CN",
+                        endDate: '0d',
+                        startDate: '-10d'
+                    })
                 });
 
                 $("#teacher_edit_add").on('submit', 'form', function () {
@@ -188,22 +195,12 @@
 
             }
 
-      
-            // $("#btnAdd").click(function () {
-               
-            //   if ( validator.form() ) {
-            //     var text = $("#teacherAdd").serialize();
-            //     $.get("/api/teacher/add?"+text, function (data) {
-            //     });
-
-            //   }
-                
-            // });
-
             // 获取日期
              $('#job-calendar').datepicker({
                 format: "yyyy-mm-dd",
-                language: "zh-CN"
+                language: "zh-CN",
+                endDate: '0d',
+                startDate: '-1d'
              })
 
         });
