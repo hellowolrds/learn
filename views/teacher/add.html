@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
     <?php include "/views/common/style.html" ?>
-    <link rel="stylesheet" href="/public/assets/bootstrap-datepicker/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/public/assets/bootstrap-datepicker/css/bootstrap-datepicker3.css">
 </head>
 <body>
     
@@ -88,34 +88,13 @@
 
     <script>
         //添加讲师操作
-        require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form', 'dateLanguage'], 
+        require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form', 'dateLanguage', 'valZH'], 
         function ($, template, layer) {
 
             // 首先取出表单元素的中的值
             // var text = $("#teacherAdd").serialize();
             // console.log(text);
-            var validator = $("#teacherAdd").validate({
-                onfocusin: function(element) { $(element).valid(); },
-                onfocusout: function(element) { $(element).valid(); },
-                onclick: function(element) { $(element).valid(); },
-                onkeyup: function(element) { $(element).valid(); },
-                rules: {
-                    tc_name: {
-                        required: true,
-                        minlength: 2
-                    },
-                    tc_pass: {
-                        required: true,
-                        minlength: 5
-                    },
-                    messages: {
-                        tc_name: '请输入您的名字',
-                        tc_pass: '请输入您的密码'
-                    }
-
-                }
-            });
-
+       
 
             var tc_id = location.search.substr(1).split("=")[1];
             if ( tc_id ) {
@@ -136,7 +115,8 @@
                $(".teacher").html(html);
 
                $("#teacher_edit_add").on('submit', 'form', function () {
-                  $(this).ajaxSubmit({
+                  if ( jiaoyan() ) {
+                     $(this).ajaxSubmit({
                       url: '/api/teacher/add',
                       type: 'post',
                       dataType: 'json',
@@ -150,6 +130,8 @@
                       }
                   });
 
+                  }
+                 
                   return false;
                        
                });
@@ -173,21 +155,24 @@
                 });
 
                 $("#teacher_edit_add").on('submit', 'form', function () {
-                  $(this).ajaxSubmit({
-                      url: '/api/teacher/update',
-                      type: 'post',
-                      dataType: 'json',
-                      success: function (data) {
-                        console.log(data);
-                      },
-                      complete: function () {
-                        layer.msg('修改成功');
-                        setTimeout(function () {
-                            location.href = "/index.php/teacher/list";
-                        }, 1500);
-                       
-                      }
-                  });
+                    
+                  if (jiaoyan()) {
+                    $(this).ajaxSubmit({
+                        url: '/api/teacher/update',
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        complete: function () {
+                            layer.msg('修改成功');
+                            setTimeout(function () {
+                                location.href = "/index.php/teacher/list";
+                            }, 1500);
+                        
+                        }
+                    });
+                  }
 
                   return false;
                        
@@ -202,6 +187,41 @@
                 endDate: '0d',
                 startDate: '-1d'
              })
+
+             function jiaoyan () {
+                var validator = $("#teacherAdd").validate({
+                    rules: {
+                        tc_name: {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 6
+                        },
+                        tc_pass: {
+                            required: true,
+                            minlength: 5,
+                            maxlength: 15
+                        },
+                        tc_join_date: {
+                            required: true,
+                            date: true
+                        },
+                        messages: {
+                            tc_name: {
+                                required: "请输入您的用户名"
+                            },
+                            tc_pass: '请输入您的密码',
+                            tc_join_date: {
+                                required: "请输入日期",
+                                date: "请输入有效的日期"
+                            }
+                        }
+
+                    }
+             });
+
+                return validator.form();
+
+             }
 
         });
     </script>

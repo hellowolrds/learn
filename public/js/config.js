@@ -8,6 +8,7 @@
 			jquery: 'assets/jquery/jquery.min',
 			bootstrap: 'assets/bootstrap/js/bootstrap.min',
 			validate: 'assets/jquery-validate/jquery.validate.min',
+			valZH: 'assets/jquery-validate/jquery.zh',
 			cookie: 'assets/jquery-cookie/jquery.cookie',
 			echarts: 'assets/echarts/echarts.min',
 			nprogress: 'assets/nprogress/nprogress',
@@ -26,7 +27,10 @@
 				deps: ['jquery', 'bootstrap']
 			},
 			dateLanguage: {
-				deps: ['jquery', 'bootstrap', 'datepicker']
+				deps: ['datepicker']
+			},
+			valZH: {
+				deps: ['validate']
 			}
 		}
 	});

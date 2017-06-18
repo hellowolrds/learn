@@ -15,6 +15,9 @@ a:hover,
 a:focus {
   text-decoration: none;
 }
+.main .body label.error {
+  color: red;
+}
 .aside {
   position: fixed;
   left: 0;

@@ -1,4 +1,4 @@
-requirejs(['jquery','validate', 'cookie'],function ($) {
+requirejs(['jquery','validate', 'cookie', 'valZH'],function ($) {
   // 将表单进行验证
   $("#loginForm").validate({
         rules: {
