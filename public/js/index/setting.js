@@ -10,7 +10,7 @@ define(['jquery', 'template', 'region', 'form'], function ($, template) {
 
   });
 
-  $(".settings").on('click', '#teacher_update', function () {
+  $(".settings").on('submit', '#teacher_update', function () {
     
     var $this = $(this),
       tc_hometown = '';

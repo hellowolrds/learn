@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label for="" class="col-md-3 control-label">姓名</label>
                     <div class="col-md-4">
-                        <input type="text" name="tc_name" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
+                        <input type="text"  name="tc_name" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
                     </div>
                 </div>
              {{ if isAdd }}
@@ -204,18 +204,19 @@
                         tc_join_date: {
                             required: true,
                             date: true
+                        }
+                    },
+                    messages: {
+                        tc_name: {
+                            required: "请输入您的用户名"
                         },
-                        messages: {
-                            tc_name: {
-                                required: "请输入您的用户名"
-                            },
-                            tc_pass: '请输入您的密码',
-                            tc_join_date: {
-                                required: "请输入日期",
-                                date: "请输入有效的日期"
-                            }
+                        tc_pass: '请输入您的密码',
+                        tc_join_date: {
+                            required: "请输入日期",
+                            date: "请输入有效的日期"
                         }
                     }
+                    
              });
 
                 return validator.form();

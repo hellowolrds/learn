@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <!-- 侧边栏 -->
+    <!-- 侧边栏 我的输入法-->
     <?php include "/views/common/aside.html" ?>
     <!-- 主体 -->
     <div class="main">
@@ -35,7 +35,9 @@
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">头像</label>
                 <div class="col-md-2 preview">
-                    <img src="{{tc_avatar}}">
+                    {{if tc_avatar}}
+                    <img src="{{tc_avatar}}"> {{else}}
+                    <img src="/public/images/default.png" alt="">{{/if}}
                     <input type="file" id="upfile" name={{tc_avatar}}>
                     <div class="cover">
                         <i class="fa fa-upload"></i>                  
@@ -88,7 +90,7 @@
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">电子邮箱</label>
                 <div class="col-md-5">
-                    <input type="text" name="tc_email" value={{tc_email}} class="form-control input-sm">
+                    <input type="text" name="tc_email" value="{{tc_email}}" class="form-control input-sm">
                 </div>
             </div>
             <div class="form-group">
@@ -101,7 +103,7 @@
                 <label for="" class="col-md-3 control-label">个人介绍</label>
                 <div class="col-md-5 ckeditor">
                     <textarea name="tc_introduce" rows="15" class="form-control input-sm">
-                        {{tc_introduce}}
+                        {{#tc_introduce}}
                     </textarea>
                 </div>
             </div>
