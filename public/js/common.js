@@ -12,6 +12,8 @@ define(['jquery', 'nprogress', 'template', 'layer','cookie'],
 
 	//左侧菜单高亮显示
 	var nav = $(".navs").find("[href $= '"+ path +"']");
+	
+
 	nav.addClass("active");
 	// 左侧二级菜单默认显示
 	// closest() 方法获得匹配选择器的第一个祖先元素，从当前元素开始沿 DOM 树向上。

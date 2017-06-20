@@ -18,7 +18,8 @@
 			dateLanguage: 'assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
 			layer: 'assets/layer/layer',
 			form: 'assets/jquery-form/jquery.form',
-			region: 'assets/jquery-region/jquery.region'
+			region: 'assets/jquery-region/jquery.region',
+			uploadify: 'assets/uploadify/jquery.uploadify.min'
 		},
 		//模块之间的依赖配置
 		shim: {
@@ -35,6 +36,9 @@
 				deps: ['validate']
 			},
 			region: {
+				deps: ['jquery']
+			},
+			uploadify: {
 				deps: ['jquery']
 			}
 		}
