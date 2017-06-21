@@ -24,15 +24,20 @@
                     <div class="title">
                         <h5>创建课程 <small>CREATE A COURSE</small></h5>
                     </div>
-                    <form action="" class="form-horizontal col-md-7">
+                    <form action="" id="course_form" class="form-horizontal col-md-7">
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">课程标题</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" placeholder="请填写课程标题">
+                                <input type="text" class="form-control input-sm" placeholder="请填写课程标题" id="cs_name" 
+                                data-required 
+                                data-describedby="cs_name_msg" 
+                                data-description="cs_name">
+                                <p class="help-block" id="cs_name_msg"></p>
                             </div>
                         </div>
                         <div class="col-md-11">
-                            <a href="course_add_step1.html" class="btn btn-success btn-sm pull-right">创建课程</a>
+                            <!--<a href="../course/course_add_step1" class="btn btn-success btn-sm pull-right">创建课程</a>-->
+                            <input type="submit" class="btn btn-success btn-sm pull-right" value="创建课程">
                         </div>
                     </form>
                     <div class="extra col-md-3">
@@ -45,5 +50,9 @@
     </div>
 
     <?php include "/views/common/script.html" ?>
+
+    <script>
+        require(['courseAdd']);
+    </script>
 </body>
 </html>

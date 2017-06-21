@@ -6,6 +6,7 @@
 			index: 'js/index/index',
 			setting: 'js/index/setting',
 			teacherList: 'js/teacher/list',
+			courseAdd: 'js/course/course_add',
 			jquery: 'assets/jquery/jquery.min',
 			bootstrap: 'assets/bootstrap/js/bootstrap.min',
 			validate: 'assets/jquery-validate/jquery.validate.min',
@@ -19,7 +20,9 @@
 			layer: 'assets/layer/layer',
 			form: 'assets/jquery-form/jquery.form',
 			region: 'assets/jquery-region/jquery.region',
-			uploadify: 'assets/uploadify/jquery.uploadify.min'
+			uploadify: 'assets/uploadify/jquery.uploadify.min',
+			ckeditor: 'assets/ckeditor/ckeditor',
+			val: 'assets/validate/jquery-validate.min'
 		},
 		//模块之间的依赖配置
 		shim: {
@@ -39,6 +42,12 @@
 				deps: ['jquery']
 			},
 			uploadify: {
+				deps: ['jquery']
+			},
+			ckeditor: {
+				exports: 'CKEDITOR'
+			},
+			val: {
 				deps: ['jquery']
 			}
 		}

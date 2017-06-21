@@ -1,4 +1,5 @@
-define(['jquery', 'template', 'layer', 'region', 'validate','form', 'uploadify', 'datepicker'], function ($, template, layer) {
+define(['jquery', 'template', 'layer', 'ckeditor', 'region', 'validate','form', 'uploadify', 'datepicker'], 
+function ($, template, layer, CKEDITOR) {
 
   // 第一步，获取讲师个人资料
   $.get('/api/teacher/profile', function ( data ) {
@@ -9,6 +10,10 @@ define(['jquery', 'template', 'layer', 'region', 'validate','form', 'uploadify',
     });
 
     upload();
+    
+    CKEDITOR.replace('tc_introduce');
+    CKEDITOR.instances.tc_introduce.updateElement();
+
   });
   
 
