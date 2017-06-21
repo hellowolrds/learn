@@ -1,4 +1,4 @@
-define(['jquery', 'template', 'layer', 'region', 'form', 'uploadify', 'datepicker'], function ($, template, layer) {
+define(['jquery', 'template', 'layer', 'region', 'validate','form', 'uploadify', 'datepicker'], function ($, template, layer) {
 
   // 第一步，获取讲师个人资料
   $.get('/api/teacher/profile', function ( data ) {
@@ -31,14 +31,69 @@ define(['jquery', 'template', 'layer', 'region', 'form', 'uploadify', 'datepicke
 
         $(".preview img").attr('src', path);
         $(".avatar img").attr('src', path);
+        $.cookie('img', path, {expires: 1, path: '/'});
       }
 
     });
   }
 
+  // 再提交前，先进行表单的校验
 
+  function jiaoyan () {
+    $.validator.addMethod("isMobile", function(value, element) {
+      var length = value.length;
+      var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+      return this.optional(element) || (length == 11 && mobile.test(value));
+	  }, "请正确填写您的手机号码");
+    var validator = $("#teacher_update").validate({
+      rules: {
+        tc_roster: {
+          required: true,
+          minlength: 2,
+          maxlength: 8
+        },
+        tc_birthday: {
+          required: true,
+          date: true
+        },
+        tc_cellphone: {
+          required: true,
+          isMobile: true
+        },
+        tc_email: {
+          required: true,
+          email: true
+        },
+        tc_join_date: {
+          required: true,
+          date: true
+        }
+      },
+      messages: {
+        tc_roster: {
+          required: "请输入您的昵称",
+          minlength: "昵称必需由两个字母组成"
+        },
+        tc_birthday: {
+          required: "请输入您的生日",
+          date: "输入正确格式的生日"
+        },
+        tc_cellphone: {
+          required: "请输入您的手机号码"
+        },
+        tc_email: {
+          required: "请输入您的邮箱",
+          email: "输入正确的邮箱格式"
+        },
+        tc_join_date: {
+          required: "请输入您的入职日期",
+          date: "输入的日期格式不正确"
+        }
 
-
+      }
+    });
+    return validator.form();
+  }
 
 
 
@@ -50,19 +105,22 @@ define(['jquery', 'template', 'layer', 'region', 'form', 'uploadify', 'datepicke
             tc_hometown += $(this).find('option:selected').text() + '|';
         });
         // console.log(tc_hometown);
-        $this.ajaxSubmit({
-            type: 'post',
-            data: {tc_hometown: tc_hometown.slice(0, -1)},
-            success: function (data) {
-              console.log(data);
-                if(data.code == 200) {
-                    setTimeout(function () {
-                      layer.msg('修改成功');
-                    }, 500);
-                }
-            }
-        });
+        if ( jiaoyan () ) {
+          $this.ajaxSubmit({
+              type: 'post',
+              data: {tc_hometown: tc_hometown.slice(0, -1)},
+              success: function (data) {
+                console.log(data);
+                  if(data.code == 200) {
+                      setTimeout(function () {
+                        layer.msg('修改成功');
+                      }, 500);
+                  }
+              }
+          });
 
+        }
+      
     return false;
   });
 

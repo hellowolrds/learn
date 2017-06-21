@@ -91,6 +91,8 @@
         require(['jquery', 'template', 'layer', 'validate', 'bootstrap', 'datepicker', 'form', 'dateLanguage', 'valZH'], 
         function ($, template, layer) {
 
+            // 设置左侧菜单高亮
+            $(".navs").find("[href = '../teacher/list']").addClass("active");
             // 首先取出表单元素的中的值
             // var text = $("#teacherAdd").serialize();
             // console.log(text);
