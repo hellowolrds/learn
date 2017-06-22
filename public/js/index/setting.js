@@ -11,7 +11,8 @@ function ($, template, layer, CKEDITOR) {
 
     upload();
     
-    CKEDITOR.replace('tc_introduce');
+    CKEDITOR.replace('tc_introduce',{
+      skin: 'moono-lisa'});
     CKEDITOR.instances.tc_introduce.updateElement();
 
   });

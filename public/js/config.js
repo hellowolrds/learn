@@ -7,6 +7,8 @@
 			setting: 'js/index/setting',
 			teacherList: 'js/teacher/list',
 			courseAdd: 'js/course/course_add',
+			courseStep1: 'js/course/course_step1',
+			courseStep2: 'js/course/course_step2',
 			jquery: 'assets/jquery/jquery.min',
 			bootstrap: 'assets/bootstrap/js/bootstrap.min',
 			validate: 'assets/jquery-validate/jquery.validate.min',
@@ -22,7 +24,8 @@
 			region: 'assets/jquery-region/jquery.region',
 			uploadify: 'assets/uploadify/jquery.uploadify.min',
 			ckeditor: 'assets/ckeditor/ckeditor',
-			val: 'assets/validate/jquery-validate.min'
+			val: 'assets/validate/jquery-validate.min',
+			jcrop: 'assets/jcrop/js/Jcrop.min'
 		},
 		//模块之间的依赖配置
 		shim: {
@@ -48,6 +51,9 @@
 				exports: 'CKEDITOR'
 			},
 			val: {
+				deps: ['jquery']
+			},
+			jcrop: {
 				deps: ['jquery']
 			}
 		}
