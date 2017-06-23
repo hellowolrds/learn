@@ -6,14 +6,12 @@
     <link rel="stylesheet" href="/public/assets/jcrop/css/Jcrop.css">
     <style>
         #upfile_pic-button {
-            line-height: 19px!important; 
+            line-height: 19px!important;
         }
         .jcrop-thumb {
             top: 0;
             right: 0;
         }
-
-
     
     </style>
     <?php include "/views/common/style.html" ?>
@@ -98,8 +96,12 @@
                      <input type="file" name="cs_cover_original" value="选择图片" class="btn btn-success btn-sm" id="upfile_pic">
                 </div>
                 <div class="col-md-2">
-                    <input type="button" id="jcrop_btn" value="保存图片" class="btn btn-warning btn-sm" id="jcrop_btn" disabled>
+                    <input type="button" id="jcrop_btn" value="裁切图片" class="btn btn-warning btn-sm" id="jcrop_btn" disabled>
                 </div>
+                <input type="hidden" name="cropx" id="cropx" value="0" />
+                <input type="hidden" name="cropy" id="cropy" value="0" />
+                <input type="hidden" name="cropw" id="cropw" value="0" />
+                <input type="hidden" name="croph" id="croph" value="0" />
             </div>
         </div>
     </script>
