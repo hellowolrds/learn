@@ -1,5 +1,8 @@
 define(['jquery', 'template', 'layer', 'uploadify', 'jcrop'], function ($, template, layer) {
-
+  // 左侧菜单默认显示
+  var nav = $(".navs").find("[href = '../course/course_add']").addClass("active");
+  nav.closest('ul').show();
+  nav.closest('ul').parent('li').find(".arrow").addClass("fa-angle-down");
   var cs_id = getQueryString('cs_id');
 
   // 渲染页面
@@ -49,9 +52,10 @@ define(['jquery', 'template', 'layer', 'uploadify', 'jcrop'], function ($, templ
             // 缩略图放到指定的位置。
             this.initComponent('Thumbnailer', {width: 240, height: 120, thumb:'.thumb'});
             this.newSelection();
-            var height = this.ui.stage.height - 100;
+            var height = this.ui.stage.height;
             var width = this.ui.stage.width;
-            this.setSelect([0, 50, width, height]);
+            var y = ( height - width / 2 ) / 2;
+            this.setSelect([0, y, width, width / 2]);
           });
           
           break;
@@ -78,7 +82,7 @@ define(['jquery', 'template', 'layer', 'uploadify', 'jcrop'], function ($, templ
               if ( data.code === 200 ) {
                 layer.msg("剪裁成功");
                 setTimeout(function () {
-                  location.href = "../course/course_add_step3"
+                  location.href = "../course/course_add_step3?cs_id=" + cs_id;
                 }, 1500);
               }
             }

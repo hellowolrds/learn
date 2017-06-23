@@ -9,6 +9,8 @@
 			courseAdd: 'js/course/course_add',
 			courseStep1: 'js/course/course_step1',
 			courseStep2: 'js/course/course_step2',
+      courseStep3: 'js/course/course_step3',
+			courseList: 'js/course/course_list',
 			jquery: 'assets/jquery/jquery.min',
 			bootstrap: 'assets/bootstrap/js/bootstrap.min',
 			validate: 'assets/jquery-validate/jquery.validate.min',
@@ -25,7 +27,8 @@
 			uploadify: 'assets/uploadify/jquery.uploadify.min',
 			ckeditor: 'assets/ckeditor/ckeditor',
 			val: 'assets/validate/jquery-validate.min',
-			jcrop: 'assets/jcrop/js/Jcrop.min'
+			jcrop: 'assets/jcrop/js/Jcrop.min',
+			lazyload: 'assets/lazyload/lazyload'
 		},
 		//模块之间的依赖配置
 		shim: {
@@ -54,7 +57,10 @@
 				deps: ['jquery']
 			},
 			jcrop: {
-				deps: ['jquery']
+        deps: ['jquery']
+      },
+			lazyload: {
+        deps: ['jquery']
 			}
 		}
 	});

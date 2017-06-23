@@ -1,6 +1,11 @@
 define(['jquery', 'template', 'ckeditor', 'layer', 'form'], function ($, template, CKEDITOR, layer) {
   
-    var cs_id = getQueryString('cs_id');
+  // 设置左侧菜单高亮
+  var nav = $(".navs").find("[href = '../course/course_add']").addClass("active");
+  nav.closest('ul').show();
+  nav.closest('ul').parent('li').find(".arrow").addClass("fa-angle-down");
+  
+  var cs_id = getQueryString('cs_id');
   //调用渲染函数
   render();
   // 获取二级目录
